@@ -1,0 +1,71 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <div class="row justify-content-between mt-3">
+        <h2 class="col-4">{{ title|title }}</h2>
+        <a class="btn btn-success col-2" href="/addPatient">ajouter</a>
+    </div>
+    <div class="card mt-3">
+        <div class="card-header">
+            <form method="POST" action="/rechercheParId/" >
+                            {% csrf_token %}
+
+            <div class="input-group">
+              <div class="form-outline">
+                <input type="search" class="form-control" name="id"/>
+              </div>
+              <button  type="submit" class="btn btn-primary">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+                </form>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+        <thead>
+            <tr>
+              <th scope="col">Nom</th>
+                <th scope="col">Prenom</th>
+              <th scope="col">email</th>
+              <th scope="col">Date de Naissance</th>
+                <th scope="col">Date Rendez vous</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in page.object_list %}
+            <tr>
+              <td>{{p.nom}}</td>
+              <td>{{p.prenom}}</td>
+              <td>{{p.email}}</td>
+              <td>{{p.dateNaissance}}</td>
+                <td>{{ p.rendezVous.dateRendezVous }}</td>
+              <td>
+                  <a href="/patient/details/{{ p.id }}" class="btn btn-sm btn-primary">Affiche</a>
+                  <a href="/updatePatient/{{ p.id }}" class="btn btn-sm btn-info">Edit</a>
+                  <a href="/patient/delete/{{ p.id }}" class="btn btn-sm btn-warning" onclick="return confirm('tu veux supprimer l objet d id{{ p.id }}');">Supprimer</a>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+            </table>
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a   href="?page={{ page.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page.number }} of {{ page.paginator.num_pages }}.
+        </span>
+
+        {% if page.has_next %}
+            <a href="?page={{ page.next_page_number }}">next</a>
+            <a href="?page={{ page.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+        </div>
+    </div>
+{% endblock content %}

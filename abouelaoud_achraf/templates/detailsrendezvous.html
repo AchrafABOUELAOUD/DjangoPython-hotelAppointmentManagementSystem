@@ -1,0 +1,39 @@
+{% extends 'layout.html'%}
+{% block content %}
+        <form method="POST" action="/rendezvous/update" class="post-form">
+            {% csrf_token %}
+            <input type="text" name="id" id="id" value="{{ rendezvous.id }}" hidden>
+
+
+            <div class="form-group">
+                <label for="dateRendezVous">date Rendez-Vous</label>
+                <input type="date" name="dateRendezVous" class="form-control" disabled id="dateNaissance" value="{{rendezvous.dateRendezVous|date:'Y-m-d'}}" type="date">
+            </div>
+            <div class="form-group">
+                <label for="Medecin">Medecin</label>
+                <input type="text" name="Medecin" class="form-control" disabled id="Medecin" value="{{rendezvous.medecin.nom}} {{ rendezvous.medecin.prenom }}">
+            </div>
+            <div class="form-group">
+                <label for="Consultation">Consultation</label>
+                <input type="text" name="Consultation" class="form-control" disabled id="Consultation" value="{{rendezvous.consultation.description}} ">
+            </div>
+
+            <div class="form-group">
+                <label for="iscanceled">iscanceled</label>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="iscanceled" id="iscanceled" disabled value="True" {% if rendezvous.isCanceled %}
+                checked
+                {% endif %} >
+                <label class="form-check-label" for="oui"> Oui</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" disabled name="iscanceled" id="iscanceled"  d
+                       value="False"  {% if not rendezvous.isCanceled %}
+                checked
+                {% endif %}>
+                <label class="form-check-label" for="non"> Non</label>
+            </div>
+        </div>
+
+        </form>
+{% endblock content %}

@@ -1,0 +1,35 @@
+{% extends 'layout.html'%}
+{% block content %}
+        <form method="POST" action="/consultation/update" class="post-form">
+            {% csrf_token %}
+        <input type="text" name="id" id="id" value="{{ consultation.id }}" hidden>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" name="description" class="form-control" id="description" value="{{ consultation.description }}">
+            </div>
+            <div class="form-group">
+                <label for="nom">traitement</label>
+                <input type="text" name="traitement" class="form-control" id="traitement" value="{{ consultation.traitement }}">
+            </div>
+            <div class="form-group">
+                <label for="nom">TypeDeConsultation</label>
+                <select name="typeDeConsultation" class="form-control">
+                   <option selected>Choose...</option>
+                     <option value="Présentielle"
+                        {% if consultation.typeDeConsultation == "Présentielle" %}
+                                selected
+                        {% endif %}
+                     >Présentielle </option>
+                    <option value="Distantielle"
+                             {% if consultation.typeDeConsultation == "Distantielle" %}
+                             selected
+                             {% endif %} 
+
+
+                    >Distantielle</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">update</button>
+        </form>
+{% endblock content %}

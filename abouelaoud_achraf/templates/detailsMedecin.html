@@ -1,0 +1,19 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+
+            <div class="form-group">
+                <label for="nom">nom</label>
+                <input type="text" name="nom" class="form-control" id="nom" value="{{ medecin.nom }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="prenom">prenom</label>
+                <input type="text" name="prenom" class="form-control" id="prenom" value="{{ medecin.prenom }}" disabled>
+            </div>
+            <div class="form-group">
+                <label for="specialiter">specialiter</label>
+                     <input type="text" name="specialiter" class="form-control" id="specialiter" value="{{ medecin.specialiter }}" disabled>
+            </div>
+
+        </form>
+{% endblock content %}

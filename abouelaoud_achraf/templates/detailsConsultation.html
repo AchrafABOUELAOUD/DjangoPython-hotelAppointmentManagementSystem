@@ -1,0 +1,19 @@
+{% extends 'layout.html'%}
+{% block content %}
+
+            {% csrf_token %}
+
+            <div class="form-group" >
+                <label for="nom">Description</label>
+                <input type="text" name="description" disabled class="form-control" id="description" value="{{ consulter.description }}">
+            </div>
+            <div class="form-group" >
+                <label for="nom">Traitement</label>
+                <input type="text" name="traitement" disabled class="form-control" id="traitement" value="{{ consulter.traitement }}">
+            </div>
+            <div class="form-group" >
+                <label for="nom">TypeDeConsultation</label>
+                <input type="text" name="typeDeConsultation" disabled class="form-control" id="typeDeConsultation" value="{{ consulter.typeDeConsultation }}">
+            </div>
+
+{% endblock content %}
